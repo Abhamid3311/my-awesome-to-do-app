@@ -1,3 +1,4 @@
+import moment from 'moment';
 import React from 'react';
 import { useState } from 'react';
 
@@ -5,6 +6,9 @@ const AddTodo = ({ onAddTodo }) => {
     const [title, setTitle] = useState('');
     const [desc, setDesc] = useState('');
     const [status, setStatus] = useState('');
+    const today = moment();
+
+    console.log();
 
     //get Value from Form
     const handleTitle = e => {
@@ -23,7 +27,8 @@ const AddTodo = ({ onAddTodo }) => {
         const newTodo = {
             title,
             desc,
-            status
+            status,
+            time: today.format('DD-MM-YYYY')
         };
         onAddTodo(newTodo);
 
@@ -37,15 +42,15 @@ const AddTodo = ({ onAddTodo }) => {
             <form className='my-12' onSubmit={handleAddToDo}>
                 <input
                     type="text"
-                    class="input input-bordered input-primary w-96 mx-auto mb-4 bg-black text-white"
+                    className="input input-bordered input-primary w-96 mx-auto mb-4 bg-black text-white"
                     placeholder='Title'
                     name='title'
                     onBlur={handleTitle}
                     id='title' required /> <br />
 
                 <select
-                    class="select select-primary  w-96 mx-auto mb-4 bg-black text-white" onChange={handleStatus}>
-                    <option disabled selected>Choose Status</option>
+                    className="select select-primary  w-96 mx-auto mb-4 bg-black text-white" onChange={handleStatus}>
+                    <option disabled defaultValue>Choose Status</option>
                     <option>Open</option>
                     <option>Working</option>
                     <option>Done</option>
@@ -54,7 +59,7 @@ const AddTodo = ({ onAddTodo }) => {
 
                 <textarea
                     type="text"
-                    class="textarea textarea-primary w-96 mx-auto mb-4 bg-black text-white" placeholder='Descriptions'
+                    className="textarea textarea-primary w-96 mx-auto mb-4 bg-black text-white" placeholder='Descriptions'
                     onBlur={handleDesc}
                     id='desc' required /> <br />
 
